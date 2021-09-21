@@ -1,16 +1,19 @@
 library(shiny)
 library(shinydashboard)
 library(shinydashboardPlus)
+library(shinycssloaders)
 
 ui <- shinydashboardPlus::dashboardPage(
   title = "Wasanii", 
   
   options = list(sidebarExpandOnHover = TRUE), 
   
+  # ---- Header ----
   header = shinydashboardPlus::dashboardHeader(
     title = ""
   ), 
   
+  # ---- Sidebar ----
   sidebar = shinydashboardPlus::dashboardSidebar(
     minified = TRUE, collapsed = TRUE, 
     
@@ -37,18 +40,64 @@ ui <- shinydashboardPlus::dashboardPage(
     )
   ), 
   
+  # ---- Body ----
   body = dashboardBody(
     tabItems(
+      # ---- HOME ----
       tabItem(
         tabName = "Home", 
         p("Welcome to Wasanii dashboard")
       ), 
       
+      # ---- STATS ----
       tabItem(
         tabName = "Stats", 
-        p("All Stats & Plots go here.")
+        
+        tabsetPanel(
+          # ---- .overview ----
+          tabPanel(
+            title = h3("Overview"), 
+            
+            tags$br(), 
+            
+            # Texts Per Day:
+            fluidRow(
+              column(
+                width = 12, 
+                align = "center", 
+                
+                box(
+                  title = "Texts Per Day", 
+                  status = "primary", 
+                  width = 9, 
+                  solidHeader = TRUE, 
+                  
+                  plotlyOutput(
+                    outputId = "textsPerDayBars", 
+                    width = "100%", height = "100%"
+                  ) |> withSpinner(type = 7)
+                ), 
+                
+                column(
+                  width = 3, 
+                  
+                  valueBoxOutput(
+                    outputId = "textsPerDayBarsVB", 
+                    width = NULL
+                  ) |> withSpinner(type = 7)
+                )
+              )
+            )
+          ), 
+          
+          # ---- .comparisons ----
+          tabPanel(
+            title = h3("Comparisons")
+          )
+        )
       ), 
       
+      # ---- ABOUT ----
       tabItem(
         tabName = "About", 
         p("Who's Wasanii? Contact? App author.")
