@@ -108,7 +108,7 @@ textsPerPersonData <- chat |> count(author) |>
 pal <- brewer.pal(n = nrow(textsPerPersonData), name = "Dark2") |> 
   setNames(textsPerPersonData$author)
 
-textsPerPerson <- textsPerPersonData |> 
+totalTextsPerPerson <- textsPerPersonData |> 
   plot_ly(x = ~ n, y = ~ author, type = "bar", color = ~ author, 
           colors = pal, 
           hoverinfo = "text", 
@@ -121,6 +121,12 @@ textsPerPerson <- textsPerPersonData |>
                   traceorder = "normal"
                   )
   )
+
+# Who has had the max number of texts?
+whoMaxTexts <- textsPerPersonData |> slice_max(order_by = n)
+
+# Who has had the least number of texts?
+whoMinTexts <- textsPerPersonData |> slice_min(order_by = n)
 
 textRatioPerPerson <- textsPerPersonData |> 
   mutate(author = reorder(author, -Percentage)) |> 
