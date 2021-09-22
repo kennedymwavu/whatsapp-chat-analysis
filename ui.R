@@ -149,6 +149,35 @@ ui <- shinydashboardPlus::dashboardPage(
                   ) |> withSpinner(type = 7)
                 )
               )
+            ), 
+            
+            # What ratio of the total texts has everyone sent?
+            fluidRow(
+              column(
+                width = 12, 
+                align = "center", 
+                
+                box(
+                  width = 8, 
+                  title = "Ratio of total texts per person", 
+                  solidHeader = TRUE, 
+                  status = "primary", 
+                  
+                  plotlyOutput(
+                    outputId = "textRatioPerPerson", 
+                    width = "100%", height = "100%"
+                  ) |> withSpinner(type = 7)
+                ), 
+                
+                column(
+                  width = 4, 
+                  
+                  valueBoxOutput(
+                    outputId = "textRatioPerPersonVB", 
+                    width = NULL
+                  )
+                )
+              )
             )
           )
         )

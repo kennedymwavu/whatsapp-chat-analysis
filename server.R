@@ -46,4 +46,21 @@ server <- function(input, output, session) {
       subtitle = "Sent the least texts"
     )
   })
+  
+  # Texts ratio per person:
+  output$textRatioPerPerson <- renderPlotly({
+    textRatioPerPerson
+  })
+  
+  output$textRatioPerPersonVB <- renderValueBox({
+    valueBox(
+      value = paste0(
+        whoMaxTexts$author, 
+        ", ", 
+        whoMaxTexts$Percentage, "%"
+      ), 
+      
+      subtitle = "Leading text sender"
+    )
+  })
 }
