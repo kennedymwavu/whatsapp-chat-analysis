@@ -87,12 +87,36 @@ ui <- shinydashboardPlus::dashboardPage(
                   ) |> withSpinner(type = 7)
                 )
               )
+            ), 
+            
+            # Texts per month line chart:
+            fluidRow(
+              column(
+                width = 12, 
+                align = "center", 
+                
+                box(
+                  width = NULL, 
+                  title = "Monthly Texts Per Person", 
+                  status = "primary", 
+                  solidHeader = TRUE, 
+                  
+                  plotlyOutput(
+                    outputId = "textsPerMonthLineChart", 
+                    width = "100%", height = "100%"
+                  ) |> withSpinner(type = 7)
+                )
+                # *** For now this part has no VB ***
+              )
             )
           ), 
           
           # ---- .comparisons ----
           tabPanel(
-            title = h3("Comparisons")
+            title = h3("Comparisons"), 
+            
+            # Who's sent what number of texts?
+            
           )
         )
       ), 
