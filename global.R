@@ -48,9 +48,13 @@ chat <- chat |>
     )
   )
 
+# When is the start of the chat from the data?
+chatStart <- chat$time |> min()
+chatEnd <- chat$time |> max()
 
 # Texts per day bar chart:
-textsPerDayBars <- chat |> count(day) |> 
+textsPerDayData <- chat |> count(day)
+textsPerDayBars <- textsPerDayData |> 
   plot_ly(x = ~ day, y = ~ n, type = "bar", 
           hoverinfo = "text", 
           text = ~ paste0("</br>", day, "</br>", n, " texts")
@@ -60,6 +64,9 @@ textsPerDayBars <- chat |> count(day) |>
     xaxis = list(title = "Day")
   )
 
+# Day with highest number of texts so far:
+dayWithMostTexts <- textsPerDayData |> 
+  dplyr::slice_max(order_by = n, n = 1)
 
 # Monthly analyses:
 monthlyTextsPerPerson <- chat |> 
@@ -75,7 +82,7 @@ monthsAuthorsCount <- monthlyTextsPerPerson |>
   replace_na(list(n = 0))
 
 
-textsPerDayLineChart <- monthsAuthorsCount |> 
+textsPerMonthLineChart <- monthsAuthorsCount |> 
   plot_ly(x = ~ month, y = ~ n, color = ~ author, type = "scatter", 
           mode = "lines+markers", 
           hoverinfo = "text", 
@@ -109,8 +116,8 @@ textsPerPerson <- textsPerPersonData |>
           ) |> 
   layout(
     yaxis = list(title = ""), 
-    xaxis = list(title = "Number of texts"), 
-    legend = list(orientation = "h", xanchor = "center", x = 0.5, y = -0.3, 
+    xaxis = list(title = ""), 
+    legend = list(orientation = "h", xanchor = "center", x = 0.5, y = -0.1, 
                   traceorder = "normal"
                   )
   )
