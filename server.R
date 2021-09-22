@@ -1,4 +1,5 @@
 server <- function(input, output, session) {
+  # ---- Overview ----
   # Texts per day plotly:
   output$textsPerDayBars <- renderPlotly({
     textsPerDayBars
@@ -15,5 +16,34 @@ server <- function(input, output, session) {
   
   output$textsPerMonthLineChart <- renderPlotly({
     textsPerMonthLineChart
+  })
+  
+  # ---- Comparison ---
+  output$totalTextsPerPerson <- renderPlotly({
+    totalTextsPerPerson
+  })
+  
+  output$whoMaxTexts <- renderValueBox({
+    valueBox(
+      value = paste0(
+        whoMaxTexts$author, 
+        ", ", 
+        whoMaxTexts$n
+      ), 
+      
+      subtitle = "Sent the most texts"
+    )
+  })
+  
+  output$whoMinTexts <- renderValueBox({
+    valueBox(
+      value = paste0(
+        whoMinTexts$author, 
+        ", ", 
+        whoMinTexts$n
+      ), 
+      
+      subtitle = "Sent the least texts"
+    )
   })
 }

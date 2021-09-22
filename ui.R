@@ -115,8 +115,41 @@ ui <- shinydashboardPlus::dashboardPage(
           tabPanel(
             title = h3("Comparisons"), 
             
-            # Who's sent what number of texts?
+            tags$br(), 
             
+            # Who's sent what number of texts?
+            fluidRow(
+              column(
+                width = 12, 
+                align = "center", 
+                
+                box(
+                  width = 7, 
+                  title = "Total texts per person", 
+                  solidHeader = TRUE, 
+                  status = "primary", 
+                  
+                  plotlyOutput(
+                    outputId = "totalTextsPerPerson", 
+                    width = "100%", height = "100%"
+                  ) |> withSpinner(type = 7)
+                ), 
+                
+                column(
+                  width = 4, 
+                  
+                  valueBoxOutput(
+                    outputId = "whoMaxTexts", 
+                    width = NULL
+                  ) |> withSpinner(type = 7), 
+                  
+                  valueBoxOutput(
+                    outputId = "whoMinTexts", 
+                    width = NULL
+                  ) |> withSpinner(type = 7)
+                )
+              )
+            )
           )
         )
       ), 
