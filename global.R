@@ -128,6 +128,13 @@ whoMaxTexts <- textsPerPersonData |> slice_max(order_by = n)
 # Who has had the least number of texts?
 whoMinTexts <- textsPerPersonData |> slice_min(order_by = n)
 
+otherTotalTexts <- textsPerPersonData |> arrange(n) |> 
+  slice(-c(1, n())) |> 
+  summarise(
+    totalTexts = sum(n), 
+    Percent = sum(Percentage) |> paste0("%")
+  )
+
 textRatioPerPerson <- textsPerPersonData |> 
   mutate(author = reorder(author, -Percentage)) |> 
   plot_ly(y = ~ "A", x = ~ Percentage, name = ~ author, color = ~ author, 
