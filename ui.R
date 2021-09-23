@@ -10,7 +10,16 @@ ui <- shinydashboardPlus::dashboardPage(
   
   # ---- Header ----
   header = shinydashboardPlus::dashboardHeader(
-    title = ""
+    title = span(
+      tagList(
+        icon(
+          name = "won-sign", 
+          class = "fa-solid fa-won-sign"
+        ), 
+        "Wasanii"
+      ), 
+      style = "font-weight: bold; font-family: Tahoma; font-size: 25px"
+    )
   ), 
   
   # ---- Sidebar ----
