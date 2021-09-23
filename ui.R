@@ -192,7 +192,12 @@ ui <- shinydashboardPlus::dashboardPage(
                       width = 4, 
                       
                       valueBoxOutput(
-                        outputId = "textRatioPerPersonVB", 
+                        outputId = "textRatioPerPersonMostVB", 
+                        width = NULL
+                      ), 
+                      
+                      valueBoxOutput(
+                        outputId = "textRatioPerPersonLeastVB", 
                         width = NULL
                       )
                     )

@@ -31,7 +31,7 @@ server <- function(input, output, session) {
         whoMaxTexts$n
       ), 
       
-      subtitle = "Sent the most texts"
+      subtitle = "Sent most texts"
     )
   })
   
@@ -43,7 +43,7 @@ server <- function(input, output, session) {
         whoMinTexts$n
       ), 
       
-      subtitle = "Sent the least texts"
+      subtitle = "Sent least texts"
     )
   })
   
@@ -52,7 +52,7 @@ server <- function(input, output, session) {
     textRatioPerPerson
   })
   
-  output$textRatioPerPersonVB <- renderValueBox({
+  output$textRatioPerPersonMostVB <- renderValueBox({
     valueBox(
       value = paste0(
         whoMaxTexts$author, 
@@ -60,7 +60,20 @@ server <- function(input, output, session) {
         whoMaxTexts$Percentage, "%"
       ), 
       
-      subtitle = "Leading text sender"
+      subtitle = "Leading sender"
+    )
+  })
+  
+  output$textRatioPerPersonLeastVB <- renderValueBox({
+    valueBox(
+      value = paste0(
+        whoMinTexts$author, 
+        ", ", 
+        whoMinTexts$Percentage, 
+        "%"
+      ), 
+      
+      subtitle = "Least sender"
     )
   })
 }
