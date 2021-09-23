@@ -126,64 +126,76 @@ ui <- shinydashboardPlus::dashboardPage(
             
             tags$br(), 
             
-            # Who's sent what number of texts?
-            fluidRow(
-              column(
-                width = 12, 
-                align = "center", 
+            tabBox(
+              width = 12, 
+              
+              tabPanel(
+                title = "Texts per person", 
                 
-                box(
-                  width = 7, 
-                  title = "Total texts per person", 
-                  solidHeader = TRUE, 
-                  status = "primary", 
-                  
-                  plotlyOutput(
-                    outputId = "totalTextsPerPerson", 
-                    width = "100%", height = "100%"
-                  ) |> withSpinner(type = 7)
-                ), 
-                
-                column(
-                  width = 4, 
-                  
-                  valueBoxOutput(
-                    outputId = "whoMaxTexts", 
-                    width = NULL
-                  ) |> withSpinner(type = 7), 
-                  
-                  valueBoxOutput(
-                    outputId = "whoMinTexts", 
-                    width = NULL
-                  ) |> withSpinner(type = 7)
+                # Who's sent what number of texts?
+                fluidRow(
+                  column(
+                    width = 12, 
+                    align = "center", 
+                    
+                    box(
+                      width = 7, 
+                      title = "Total texts per person", 
+                      solidHeader = TRUE, 
+                      status = "primary", 
+                      
+                      plotlyOutput(
+                        outputId = "totalTextsPerPerson", 
+                        width = "100%", height = "100%"
+                      ) |> withSpinner(type = 7)
+                    ), 
+                    
+                    column(
+                      width = 4, 
+                      
+                      valueBoxOutput(
+                        outputId = "whoMaxTexts", 
+                        width = NULL
+                      ) |> withSpinner(type = 7), 
+                      
+                      valueBoxOutput(
+                        outputId = "whoMinTexts", 
+                        width = NULL
+                      ) |> withSpinner(type = 7)
+                    )
+                  )
                 )
-              )
-            ), 
-            
-            # What ratio of the total texts has everyone sent?
-            fluidRow(
-              column(
-                width = 12, 
-                align = "center", 
+              ), 
+              
+              tabPanel(
+                title = "Ratios", 
                 
-                box(
-                  width = 8, 
-                  title = "Ratio of total texts per person", 
-                  solidHeader = TRUE, 
-                  status = "primary", 
-                  
-                  plotlyOutput(
-                    outputId = "textRatioPerPerson", 
-                    width = "100%", height = "100%"
-                  ) |> withSpinner(type = 7)
-                ), 
-                
-                column(
-                  width = 4, 
-                  
-                  valueBoxOutput(
-                    outputId = "textRatioPerPersonVB", 
-                    width = NULL
+                # What ratio of the total texts has everyone sent?
+                fluidRow(
+                  column(
+                    width = 12, 
+                    align = "center", 
+                    
+                    box(
+                      width = 8, 
+                      title = "Ratio of total texts per person", 
+                      solidHeader = TRUE, 
+                      status = "primary", 
+                      
+                      plotlyOutput(
+                        outputId = "textRatioPerPerson", 
+                        width = "100%", height = "100%"
+                      ) |> withSpinner(type = 7)
+                    ), 
+                    
+                    column(
+                      width = 4, 
+                      
+                      valueBoxOutput(
+                        outputId = "textRatioPerPersonVB", 
+                        width = NULL
+                      )
+                    )
                   )
                 )
               )
