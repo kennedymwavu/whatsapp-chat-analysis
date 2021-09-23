@@ -47,6 +47,13 @@ server <- function(input, output, session) {
     )
   })
   
+  output$otherTotalTextsVB <- renderValueBox({
+    valueBox(
+      value = otherTotalTexts$totalTexts, 
+      subtitle = "Others"
+    )
+  })
+  
   # Texts ratio per person:
   output$textRatioPerPerson <- renderPlotly({
     textRatioPerPerson
@@ -60,7 +67,7 @@ server <- function(input, output, session) {
         whoMaxTexts$Percentage, "%"
       ), 
       
-      subtitle = "Leading sender"
+      subtitle = "Leading sender market share"
     )
   })
   
@@ -73,7 +80,15 @@ server <- function(input, output, session) {
         "%"
       ), 
       
-      subtitle = "Least sender"
+      subtitle = "Least sender market share"
+    )
+  })
+  
+  
+  output$textRatioPerPersonOtherVB <- renderValueBox({
+    valueBox(
+      value = otherTotalTexts$Percent, 
+      subtitle = "Others market share"
     )
   })
 }

@@ -161,6 +161,11 @@ ui <- shinydashboardPlus::dashboardPage(
                       valueBoxOutput(
                         outputId = "whoMinTexts", 
                         width = NULL
+                      ) |> withSpinner(type = 7), 
+                      
+                      valueBoxOutput(
+                        outputId = "otherTotalTextsVB", 
+                        width = NULL
                       ) |> withSpinner(type = 7)
                     )
                   )
@@ -194,12 +199,17 @@ ui <- shinydashboardPlus::dashboardPage(
                       valueBoxOutput(
                         outputId = "textRatioPerPersonMostVB", 
                         width = NULL
-                      ), 
+                      ) |> withSpinner(type = 7), 
                       
                       valueBoxOutput(
                         outputId = "textRatioPerPersonLeastVB", 
                         width = NULL
-                      )
+                      ) |> withSpinner(type = 7), 
+                      
+                      valueBoxOutput(
+                        outputId = "textRatioPerPersonOtherVB", 
+                        width = NULL
+                      ) |> withSpinner(type = 7)
                     )
                   )
                 )
