@@ -1,6 +1,7 @@
 library(shiny)
 library(shinydashboard)
 library(shinydashboardPlus)
+library(dashboardthemes)
 library(shinycssloaders)
 library(gotop)
 
@@ -58,6 +59,8 @@ ui <- shinydashboardPlus::dashboardPage(
       tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")
     ), 
     
+    shinyDashboardThemes(theme = "poor_mans_flatly"), 
+    
     tabItems(
       # ---- HOME ----
       tabItem(
@@ -104,6 +107,8 @@ ui <- shinydashboardPlus::dashboardPage(
                 )
               )
             ), 
+            
+            tags$hr(style = "border: 0.05rem solid #203843;"), 
             
             # Texts per month line chart:
             fluidRow(
@@ -155,7 +160,7 @@ ui <- shinydashboardPlus::dashboardPage(
                     align = "center", 
                     
                     box(
-                      width = 7, 
+                      width = 8, 
                       title = "Total texts per person", 
                       solidHeader = TRUE, 
                       status = "primary", 
@@ -232,6 +237,8 @@ ui <- shinydashboardPlus::dashboardPage(
               )
             ), 
             
+            tags$hr(style = "border: 0.05rem solid #203843;"), 
+            
             fluidRow(
               column(
                 width = 12, 
@@ -303,6 +310,8 @@ ui <- shinydashboardPlus::dashboardPage(
                 )
               )
             ), 
+            
+            tags$hr(style = "border: 0.05rem solid #203843;"), 
             
             fluidRow(
               column(
