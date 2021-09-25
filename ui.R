@@ -59,6 +59,10 @@ ui <- shinydashboardPlus::dashboardPage(
       tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")
     ), 
     
+    includeHTML(
+      path = "C:/Users/kenmw/OneDrive/Documents/Programming/Mwavu/R/Projects/Shiny projects/wasanii-whatsapp-analysis/www/font.html"
+    ), 
+    
     shinyDashboardThemes(theme = "poor_mans_flatly"), 
     
     tabItems(
@@ -108,8 +112,11 @@ ui <- shinydashboardPlus::dashboardPage(
               )
             ), 
             
+            tags$br(), 
+            
             tags$hr(style = "border: 0.05rem solid #203843;"), 
             
+            tags$br(), 
             # Texts per month line chart:
             fluidRow(
               column(
