@@ -10,7 +10,8 @@ server <- function(input, output, session) {
       value = paste0(
         dayWithMostTexts$n
       ), 
-      subtitle = "Highest number of texts sent in a day so far"
+      subtitle = "Highest number of texts sent in a day so far", 
+      color = "light-blue"
     )
   })
   
@@ -31,7 +32,8 @@ server <- function(input, output, session) {
         whoMaxTexts$n
       ), 
       
-      subtitle = "Sent most texts"
+      subtitle = "Sent most texts", 
+      color = "green"
     )
   })
   
@@ -43,14 +45,16 @@ server <- function(input, output, session) {
         whoMinTexts$n
       ), 
       
-      subtitle = "Sent least texts"
+      subtitle = "Sent least texts", 
+      color = "blue"
     )
   })
   
   output$otherTotalTextsVB <- renderValueBox({
     valueBox(
       value = otherTotalTexts$totalTexts, 
-      subtitle = "Others"
+      subtitle = "Others", 
+      color = "orange"
     )
   })
   
@@ -67,7 +71,9 @@ server <- function(input, output, session) {
         whoMaxTexts$Percentage, "%"
       ), 
       
-      subtitle = "Leading sender market share"
+      subtitle = "Leading sender market share", 
+      
+      color = "green"
     )
   })
   
@@ -80,7 +86,8 @@ server <- function(input, output, session) {
         "%"
       ), 
       
-      subtitle = "Least sender market share"
+      subtitle = "Least sender market share", 
+      color = "blue"
     )
   })
   
@@ -88,7 +95,8 @@ server <- function(input, output, session) {
   output$textRatioPerPersonOtherVB <- renderValueBox({
     valueBox(
       value = otherTotalTexts$Percent, 
-      subtitle = "Others market share"
+      subtitle = "Others market share", 
+      color = "orange"
     )
   })
   
