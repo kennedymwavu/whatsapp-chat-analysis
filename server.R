@@ -92,43 +92,55 @@ server <- function(input, output, session) {
     )
   })
   
+  # ----.fav emojis----
+  emojiCountPlotList <- reactive({
+    emoji_f(topn = input$topnEmojis, chat = chat)
+  }) |> 
+    bindCache(input$topnEmojis)
+  
   output$ayooFavEmojis <- renderPlotly({
-    emojiCountPlotList$Ayoo
+    emojiCountPlotList()$Ayoo
   })
   
   output$joyFavEmojis <- renderPlotly({
-    emojiCountPlotList$Joy
+    emojiCountPlotList()$Joy
   })
   
   output$mwavuFavEmojis <- renderPlotly({
-    emojiCountPlotList$Mwavu
+    emojiCountPlotList()$Mwavu
   })
   
   output$nelvineFavEmojis <- renderPlotly({
-    emojiCountPlotList$Nelvine
+    emojiCountPlotList()$Nelvine
   })
   
   output$rachaelFavEmojis <- renderPlotly({
-    emojiCountPlotList$Rachael
+    emojiCountPlotList()$Rachael
   })
   
+  # ----.fav words----
+  wordCountPlotList <- reactive({
+    top_words(topn = input$topnWords, chat = chat)
+  }) |> 
+    bindCache(input$topnWords)
+  
   output$ayooFavWords <- renderPlotly({
-    wordCountPlotList$Ayoo
+    wordCountPlotList()$Ayoo
   })
   
   output$joyFavWords <- renderPlotly({
-    wordCountPlotList$Joy
+    wordCountPlotList()$Joy
   })
   
   output$mwavuFavWords <- renderPlotly({
-    wordCountPlotList$Mwavu
+    wordCountPlotList()$Mwavu
   })
   
   output$nelvineFavWords <- renderPlotly({
-    wordCountPlotList$Nelvine
+    wordCountPlotList()$Nelvine
   })
   
   output$rachaelFavWords <- renderPlotly({
-    wordCountPlotList$Rachael
+    wordCountPlotList()$Rachael
   })
 }
