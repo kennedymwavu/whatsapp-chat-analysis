@@ -187,7 +187,10 @@ emoji_f <- function(topn = 5, chat) {
       add_text(x = ~ n + 5, text = ~ emoji, hovertext = ~ name, size = I(20), 
                textposition = 'right') |> 
       layout(
-        yaxis = list(showticklabels = FALSE, title = "Top 5 emojis"), 
+        yaxis = list(
+          showticklabels = FALSE, 
+          title = paste0("Top ", topn, " emojis")
+        ), 
         xaxis = list(title = ""), 
         showlegend = FALSE
       )
