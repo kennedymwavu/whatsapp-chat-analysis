@@ -111,4 +111,24 @@ server <- function(input, output, session) {
   output$rachaelFavEmojis <- renderPlotly({
     emojiCountPlotList$Rachael
   })
+  
+  output$ayooFavWords <- renderPlotly({
+    wordCountPlotList$Ayoo
+  })
+  
+  output$joyFavWords <- renderPlotly({
+    wordCountPlotList$Joy
+  })
+  
+  output$mwavuFavWords <- renderPlotly({
+    wordCountPlotList$Mwavu
+  })
+  
+  output$nelvineFavWords <- renderPlotly({
+    wordCountPlotList$Nelvine
+  })
+  
+  output$rachaelFavWords <- renderPlotly({
+    wordCountPlotList$Rachael
+  })
 }

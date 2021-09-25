@@ -305,6 +305,79 @@ ui <- shinydashboardPlus::dashboardPage(
                   ) |> withSpinner(type = 7)
                 )
               )
+            ), 
+            
+            fluidRow(
+              column(
+                width = 12, 
+                align = "center", 
+                
+                h3("Most used words")
+              )
+            ), 
+            
+            tabBox(
+              width = 12, 
+              
+              tabPanel(
+                title = "Ayoo", 
+                
+                div(
+                  class = "centered", 
+                  
+                  plotlyOutput(
+                    outputId = "ayooFavWords"
+                  ) |> withSpinner(type = 7)
+                )
+              ), 
+              
+              tabPanel(
+                title = "Joy", 
+                
+                div(
+                  class = "centered", 
+                  
+                  plotlyOutput(
+                    outputId = "joyFavWords"
+                  ) |> withSpinner(type = 7)
+                )
+              ), 
+              
+              tabPanel(
+                title = "Mwavu", 
+                
+                div(
+                  class = "centered", 
+                  
+                  plotlyOutput(
+                    outputId = "mwavuFavWords"
+                  ) |> withSpinner(type = 7)
+                )
+              ), 
+              
+              tabPanel(
+                title = "Nelvine", 
+                
+                div(
+                  class = "centered", 
+                  
+                  plotlyOutput(
+                    outputId = "nelvineFavWords"
+                  ) |> withSpinner(type = 7)
+                )
+              ), 
+              
+              tabPanel(
+                title = "Rachael", 
+                
+                div(
+                  class = "centered", 
+                  
+                  plotlyOutput(
+                    outputId = "rachaelFavWords"
+                  ) |> withSpinner(type = 7)
+                )
+              )
             )
           )
         )
