@@ -167,33 +167,36 @@ emoji_data <- rwhatsapp::emojis %>% # data built into package
 # Distinct people in group:
 ourNames <- textsPerPersonData$author |> as.character()
 
-emojiCountPlotList <- vector(mode = "list", length = length(ourNames))
-names(emojiCountPlotList) <- ourNames
-
-for (name in ourNames) {
-  emojiPlot <- chat %>%
-    unnest(emoji) %>%
-    count(author, emoji, sort = TRUE) %>%
-    group_by(author) %>%
-    slice_max(order_by = n, n = 5) %>%
-    left_join(emoji_data, by = "emoji") %>% 
-    filter(author == !!name) |> 
-    mutate(emoji = reorder(emoji, n)) |> 
-    plot_ly(x = ~ n, y = ~ emoji, type = "bar", color = ~ emoji, 
-            hoverinfo = "text", 
-            text = ~ paste0(n)
-    ) |> 
-    add_text(x = ~ n + 5, text = ~ emoji, hovertext = ~ name, size = I(20), 
-             textposition = 'right') |> 
-    layout(
-      yaxis = list(showticklabels = FALSE, title = "Top 5 emojis"), 
-      xaxis = list(title = ""), 
-      showlegend = FALSE
-    )
+emoji_f <- function(topn = 5, chat) {
+  emojiCountPlotList <- vector(mode = "list", length = length(ourNames))
+  names(emojiCountPlotList) <- ourNames
   
-  emojiCountPlotList[[name]] <- emojiPlot
+  for (name in ourNames) {
+    emojiPlot <- chat %>%
+      unnest(emoji) %>%
+      count(author, emoji, sort = TRUE) %>%
+      group_by(author) %>%
+      slice_max(order_by = n, n = topn) %>%
+      left_join(emoji_data, by = "emoji") %>% 
+      filter(author == !!name) |> 
+      mutate(emoji = reorder(emoji, n)) |> 
+      plot_ly(x = ~ n, y = ~ emoji, type = "bar", color = ~ emoji, 
+              hoverinfo = "text", 
+              text = ~ paste0(n)
+      ) |> 
+      add_text(x = ~ n + 5, text = ~ emoji, hovertext = ~ name, size = I(20), 
+               textposition = 'right') |> 
+      layout(
+        yaxis = list(showticklabels = FALSE, title = "Top 5 emojis"), 
+        xaxis = list(title = ""), 
+        showlegend = FALSE
+      )
+    
+    emojiCountPlotList[[name]] <- emojiPlot
+  }
+  
+  emojiCountPlotList
 }
-
 # emojiCountPlotList$Ayoo
 # emojiCountPlotList$Joy
 # emojiCountPlotList$Rachael
@@ -225,31 +228,35 @@ to_remove <- c(stopwords(), swahili,
 
 
 
-# Top n words chart:
-wordCountPlotList <- vector(mode = "list", length(ourNames))
-names(wordCountPlotList) <- ourNames
-
-for (name in ourNames) {
-  wordPlot <- chat %>%
-    unnest_tokens(input = text,
-                  output = word) %>%
-    filter(!word %in% to_remove) %>%
-    count(author, word, sort = TRUE) %>%
-    group_by(author) %>% 
-    top_n(n = 15, n) |> 
-    filter(author == !!name) |> 
-    mutate(word = reorder(word, n)) |> 
-    plot_ly(x = ~ n, y = ~ word, color = ~ word, type = "bar", 
-            hoverinfo = "text", 
-            text = ~ paste0(n)
-    ) |> 
-    layout(
-      showlegend = FALSE, 
-      yaxis = list(title = ""), 
-      xaxis = list(title = "Count")
-    )
+top_words <- function(topn = 15, chat) {
+  # Top n words chart:
+  wordCountPlotList <- vector(mode = "list", length(ourNames))
+  names(wordCountPlotList) <- ourNames
   
-  wordCountPlotList[[name]] <- wordPlot
+  for (name in ourNames) {
+    wordPlot <- chat %>%
+      unnest_tokens(input = text,
+                    output = word) %>%
+      filter(!word %in% to_remove) %>%
+      count(author, word, sort = TRUE) %>%
+      group_by(author) %>% 
+      top_n(n = 15, n) |> 
+      filter(author == !!name) |> 
+      mutate(word = reorder(word, n)) |> 
+      plot_ly(x = ~ n, y = ~ word, color = ~ word, type = "bar", 
+              hoverinfo = "text", 
+              text = ~ paste0(n)
+      ) |> 
+      layout(
+        showlegend = FALSE, 
+        yaxis = list(title = ""), 
+        xaxis = list(title = "Count")
+      )
+    
+    wordCountPlotList[[name]] <- wordPlot
+  }
+  
+  wordCountPlotList
 }
 
 # wordCountPlotList$Ayoo
