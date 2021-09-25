@@ -18,7 +18,7 @@ server <- function(input, output, session) {
     textsPerMonthLineChart
   })
   
-  # ---- Comparison ---
+  # ---- Comparison ----
   output$totalTextsPerPerson <- renderPlotly({
     totalTextsPerPerson
   })
@@ -90,5 +90,25 @@ server <- function(input, output, session) {
       value = otherTotalTexts$Percent, 
       subtitle = "Others market share"
     )
+  })
+  
+  output$ayooFavEmojis <- renderPlotly({
+    emojiCountPlotList$Ayoo
+  })
+  
+  output$joyFavEmojis <- renderPlotly({
+    emojiCountPlotList$Joy
+  })
+  
+  output$mwavuFavEmojis <- renderPlotly({
+    emojiCountPlotList$Mwavu
+  })
+  
+  output$nelvineFavEmojis <- renderPlotly({
+    emojiCountPlotList$Nelvine
+  })
+  
+  output$rachaelFavEmojis <- renderPlotly({
+    emojiCountPlotList$Rachael
   })
 }

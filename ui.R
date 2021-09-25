@@ -2,6 +2,7 @@ library(shiny)
 library(shinydashboard)
 library(shinydashboardPlus)
 library(shinycssloaders)
+library(shinyglide)
 
 ui <- shinydashboardPlus::dashboardPage(
   title = "Wasanii", 
@@ -51,6 +52,10 @@ ui <- shinydashboardPlus::dashboardPage(
   
   # ---- Body ----
   body = dashboardBody(
+    tags$head(
+      tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")
+    ), 
+    
     tabItems(
       # ---- HOME ----
       tabItem(
@@ -125,6 +130,15 @@ ui <- shinydashboardPlus::dashboardPage(
             title = h3("Comparisons"), 
             
             tags$br(), 
+            
+            fluidRow(
+              column(
+                width = 12, 
+                align = "center", 
+                
+                h3("Number of texts")
+              )
+            ), 
             
             tabBox(
               width = 12, 
@@ -212,6 +226,83 @@ ui <- shinydashboardPlus::dashboardPage(
                       ) |> withSpinner(type = 7)
                     )
                   )
+                )
+              )
+            ), 
+            
+            fluidRow(
+              column(
+                width = 12, 
+                align = "center", 
+                
+                h3("Favorite emojis")
+              )
+            ), 
+            
+            tabBox(
+              width = 12, 
+              
+              tabPanel(
+                title = "Ayoo", 
+                
+                div(
+                  class = "centered", 
+                  plotlyOutput(
+                    outputId = "ayooFavEmojis", 
+                    width = "100%", height = "100%"
+                  ) |> withSpinner(type = 7)
+                )
+              ), 
+              
+              tabPanel(
+                title = "Joy", 
+                
+                div(
+                  class = "centered", 
+                  
+                  plotlyOutput(
+                    outputId = "joyFavEmojis", 
+                    width = "100%", height = "100%"
+                  ) |> withSpinner(type = 7)
+                )
+              ), 
+              
+              tabPanel(
+                title = "Mwavu", 
+                
+                div(
+                  class = "centered", 
+                  
+                  plotlyOutput(
+                    outputId = "mwavuFavEmojis", 
+                    width = "100%", height = "100%"
+                  ) |> withSpinner(type = 7)
+                )
+              ), 
+              
+              tabPanel(
+                title = "Nelvine", 
+                
+                div(
+                  class = "centered", 
+                  
+                  plotlyOutput(
+                    outputId = "nelvineFavEmojis", 
+                    width = "100%", height = "100%"
+                  ) |> withSpinner(type = 7)
+                )
+              ), 
+              
+              tabPanel(
+                title = "Rachael", 
+                
+                div(
+                  class = "centered", 
+                  
+                  plotlyOutput(
+                    outputId = "rachaelFavEmojis", 
+                    width = "100%", height = "100%"
+                  ) |> withSpinner(type = 7)
                 )
               )
             )
