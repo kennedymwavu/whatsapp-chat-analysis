@@ -4,7 +4,7 @@ library(shinydashboardPlus)
 library(shinymanager)
 library(dashboardthemes)
 library(shinycssloaders)
-library(gotop)
+library(spsComps)
 
 
 ui <- shinymanager::secure_app(
@@ -60,7 +60,10 @@ ui <- shinymanager::secure_app(
     
     # ---- Body ----
     body = dashboardBody(
-      gotop::use_gotop(), 
+      spsGoTop(
+        id = "up", right = "1%",  bottom= "95%", 
+        icon = icon(name = "angle-up"), color = "black"
+      ),  
       
       tags$head(
         tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")
@@ -103,7 +106,7 @@ ui <- shinymanager::secure_app(
               title = userDescription(
                 title = span("Joy", style = "color:white;"),
                 subtitle = span("Detailed", style = "color:white;"),
-                image = "images/joysquare.jpg"
+                image = "images/joy.jpg"
               ),
               status = "navy",
               closable = FALSE,
@@ -130,7 +133,7 @@ ui <- shinymanager::secure_app(
               title = userDescription(
                 title = span("Nelvine", style = "color:white;"),
                 subtitle = span("Executive", style = "color:white"),
-                image = "images/nelvinesquare.jpg"
+                image = "images/nelvine.jpg"
               ),
               status = "maroon",
               closable = FALSE,
@@ -217,7 +220,12 @@ ui <- shinymanager::secure_app(
                   )
                   # *** For now this part has no VB ***
                 )
-              )
+              ), 
+              
+              tags$br(), 
+              tags$br(), 
+              tags$br(), 
+              tags$br()
             ), 
             
             # ---- .comparisons ----
@@ -415,7 +423,7 @@ ui <- shinymanager::secure_app(
                   numericInput(
                     inputId = "topnWords", 
                     label = "Top n Words", 
-                    value = 15, 
+                    value = 10, 
                     max = 20, 
                     min = 3
                   )
@@ -466,7 +474,11 @@ ui <- shinymanager::secure_app(
                     )
                   )
                 )
-              )
+              ), 
+              
+              tags$br(), 
+              tags$br(), 
+              tags$br()
             )
           )
         ), 
@@ -477,11 +489,17 @@ ui <- shinymanager::secure_app(
           
           htmltools::tags$iframe(
             src = "about.html", 
-            width = '100%',  height = 1000,  style = "border:none;"
-          )  
+            width = '100%',  height = 500,  style = "border:none;"
+          ), 
+          
+          htmltools::tags$iframe(
+            src = "footer.html", 
+            width = "100%", 
+            height = 500, 
+            style = "border:none;"
+          )
         )
       )
     )
-  )
-  
+  ) 
 )
