@@ -70,7 +70,7 @@ ui <- shinymanager::secure_app(
       ), 
       
       includeHTML(
-        path = "C:/Users/kenmw/OneDrive/Documents/Programming/Mwavu/R/Projects/Shiny projects/wasanii-whatsapp-analysis/www/font.html"
+        path = "www/font.html"
       ), 
       
       shinyDashboardThemes(theme = "poor_mans_flatly"), 
