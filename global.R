@@ -181,15 +181,17 @@ emoji_data <- rwhatsapp::emojis %>% # data built into package
 # Distinct people in group:
 ourNames <- textsPerPersonData$author |> as.character()
 
-emoji_f <- function(topn = 5, chat) {
+emojis <- chat %>%
+  unnest(emoji) %>%
+  count(author, emoji, sort = TRUE) %>%
+  group_by(author)
+
+emoji_f <- function(topn = 5, emojis) {
   emojiCountPlotList <- vector(mode = "list", length = length(ourNames))
   names(emojiCountPlotList) <- ourNames
   
   for (name in ourNames) {
-    emojiPlot <- chat %>%
-      unnest(emoji) %>%
-      count(author, emoji, sort = TRUE) %>%
-      group_by(author) %>%
+    emojiPlot <- emojis %>%
       slice_max(order_by = n, n = topn) %>%
       left_join(emoji_data, by = "emoji") %>% 
       filter(author == !!name) |> 
@@ -244,23 +246,25 @@ to_remove <- c(stopwords(), swahili,
                )
 
 
+words <- chat %>%
+  unnest_tokens(input = text,
+                output = word) %>%
+  filter(!word %in% to_remove) %>%
+  count(author, word, sort = TRUE) %>%
+  group_by(author)
 
-top_words <- function(topn = 15, chat) {
+top_words <- function(topn = 15, words) {
   # Top n words chart:
   wordCountPlotList <- vector(mode = "list", length(ourNames))
   names(wordCountPlotList) <- ourNames
   
   for (name in ourNames) {
-    wordPlot <- chat %>%
-      unnest_tokens(input = text,
-                    output = word) %>%
-      filter(!word %in% to_remove) %>%
-      count(author, word, sort = TRUE) %>%
-      group_by(author) %>% 
-      top_n(n = 15, n) |> 
+    wordPlot <- words %>% 
+      top_n(n = topn, n) |> 
       filter(author == !!name) |> 
       mutate(word = reorder(word, n)) |> 
-      plot_ly(x = ~ n, y = ~ word, color = ~ word, type = "bar", 
+      plot_ly(x = ~ n, y = ~ word, color = ~ word, 
+              colors = "Accent", 
               hoverinfo = "text", 
               text = ~ paste0(n)
       ) |> 
