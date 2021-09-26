@@ -113,7 +113,7 @@ server <- function(input, output, session) {
   
   # ----.fav emojis----
   emojiCountPlotList <- reactive({
-    emoji_f(topn = input$topnEmojis, chat = chat)
+    emoji_f(topn = input$topnEmojis, emojis = emojis)
   }) |> 
     bindCache(input$topnEmojis)
   
@@ -139,7 +139,7 @@ server <- function(input, output, session) {
   
   # ----.fav words----
   wordCountPlotList <- reactive({
-    top_words(topn = input$topnWords, chat = chat)
+    top_words(topn = input$topnWords, words = words)
   }) |> 
     bindCache(input$topnWords)
   
