@@ -82,6 +82,8 @@ ui <- shinydashboardPlus::dashboardPage(
               subtitle = span("Source", style = "color:white;"),
               image = "images/ayoo.jpg"
             ),
+            collapsible = TRUE, 
+            collapsed = TRUE, 
             status = "orange",
             closable = FALSE,
             maximizable = TRUE,
@@ -94,6 +96,8 @@ ui <- shinydashboardPlus::dashboardPage(
               subtitle = span("Detailed", style = "color:white;"),
               image = "images/joy.jpg"
             ),
+            collapsible = TRUE, 
+            collapsed = TRUE, 
             status = "navy",
             closable = FALSE,
             maximizable = TRUE,
@@ -110,6 +114,7 @@ ui <- shinydashboardPlus::dashboardPage(
               subtitle = span("Smiler", style = "color:white"),
               image = "images/mwavu.jpeg"
             ),
+            collapsible = FALSE, 
             status = "success",
             closable = FALSE,
             maximizable = TRUE
@@ -121,6 +126,7 @@ ui <- shinydashboardPlus::dashboardPage(
               subtitle = span("Executive", style = "color:white"),
               image = "images/nelvine.jpg"
             ),
+            collapsible = FALSE, 
             status = "maroon",
             closable = FALSE,
             maximizable = TRUE
@@ -134,7 +140,10 @@ ui <- shinydashboardPlus::dashboardPage(
               subtitle = span("Comedian", style = "color:white;"),
               image = "images/rachael.jpg"
             ),
-            status = "primary",
+            collapsible = TRUE, 
+            collapsed = TRUE, 
+            status = "danger",
+            # background = "blue", 
             closable = FALSE,
             maximizable = TRUE, 
             "DIY"
