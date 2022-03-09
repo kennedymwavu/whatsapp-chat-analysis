@@ -1,6 +1,6 @@
 ui <- shinydashboardPlus::dashboardPage(
   title = "Wasanii", 
-  
+  scrollToTop = TRUE, 
   options = list(sidebarExpandOnHover = TRUE), 
   
   # ---- Header ----
