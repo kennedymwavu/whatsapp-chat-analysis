@@ -19,7 +19,8 @@ ui <- shinydashboardPlus::dashboardPage(
   
   # ---- Sidebar ----
   sidebar = shinydashboardPlus::dashboardSidebar(
-    minified = TRUE, collapsed = TRUE, 
+    minified = TRUE, 
+    collapsed = FALSE, 
     
     sidebarMenu(
       id = "tabs", 
